@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>筋トレガチャ</title>
+  <style>
+    body {
+      /* background-image は、JSでランダムに設定する*/
+      /* background-image: url("./img/bg/bg-back-double-biceps-front.jpg"); */
+      background-position: center center;          /* 画像を常に天地左右の中央に配置 */
+      background-repeat: no-repeat;                /* 画像をタイル状に繰り返し表示しない */
+      background-attachment: fixed;                /* コンテンツの高さが画像の高さより大きい時、動かないように固定 */
+      background-size: cover;                      /* 表示するコンテナの大きさに基づいて、背景画像を調整 */
+    }
+    img {
+      display: block;
+      margin: auto;
+    }
+    button {
+      border: none;
+      background-color: transparent;
+      outline: none;
+    }
+    .container {
+      text-align: center;
+      margin-top: 55px;
+    }
+    .subTitle {
+      width: 220px;
+      margin-top: 40px;
+    }
+    .buttons {
+      margin-top: 40px;
+    }
+    .do {
+      margin-right: 8px;
+    }
+    .do:hover,
+    .doNot:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="title">
+      <img class="appName" src="./img/appName.png" />
+      <img class="subTitle" src="./img/subTitle.png" />
+    </div>
+    <div class="buttons">
+      <button id="do" class="do">
+        <img src="./img/do.png" />
+      </button>
+      <button id="doNot" class="doNot">
+        <img src="./img/doNot.png" />
+      </button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      init();
+      initBackgroundImage();
+    });
+
+    function init() {
+      // JSONのキーは1からスタートさせる
+      const INDEX_ADJUSTMENT = 1;
+
+      // ファイルにするとネットワークアクセスになるので、べた書きする
+      const DOUGA_JSON = {
+        "1":"https://www.youtube.com/watch?v=dXQ7xgqqX44", 
+        "2":"https://www.youtube.com/watch?v=LARsdRVCvHU",
+        "3":"https://www.youtube.com/watch?v=nhGh9N0baQA",
+        "4":"https://www.youtube.com/watch?v=1nmW7eILIDA",
+        "5":"https://www.youtube.com/watch?v=1nmW7eILIDA",
+        "6":"https://www.youtube.com/watch?v=oalL5-xQeNg",
+        "7":"https://www.youtube.com/watch?v=jzUlLi6JFVA",
+        "8":"https://www.youtube.com/watch?v=fZJO5hYB0Tc",
+        "9":"https://www.youtube.com/watch?v=cQsupVhKcDg",
+        "10":"https://www.youtube.com/watch?v=o5vb430_m38",
+        "11":"https://www.youtube.com/watch?v=RIqa_JtJ3jk",
+        "12":"https://www.youtube.com/watch?v=SjmZGTU9tPM",
+        "13":"https://www.youtube.com/watch?v=hge3fr50o0o",
+        "14":"https://www.youtube.com/watch?v=GxDRXrpJjpI",
+        "15":"https://www.youtube.com/watch?v=yjTD95S3TUc",
+        "16":"https://www.youtube.com/watch?v=590CWWrC4PM",
+        "17":"https://www.youtube.com/watch?v=hMSUxAJHwyc",
+        "18":"https://www.youtube.com/watch?v=BFitLouawaM",
+        "19":"https://www.youtube.com/watch?v=eqZoAgF5Hkw",
+        "20":"https://www.youtube.com/watch?v=DAI9IcAxfPA",
+        "21":"https://www.youtube.com/watch?v=PquP1dO3uKg",
+        "22":"https://www.youtube.com/watch?v=XpoJfzAMneY",
+        "23":"https://www.youtube.com/watch?v=al3CoAGcrTE",
+        "24":"https://www.youtube.com/watch?v=OlGiInYmSiw",
+        "25":"https://www.youtube.com/watch?v=u-wS8jABqQI",
+        "26":"https://www.youtube.com/watch?v=PqPnVMeYvo4",
+        "27":"https://www.youtube.com/watch?v=n5Sl3zSvIUQ"
+      }
+
+      document.getElementById("do").addEventListener("click", function () {
+        //JSON要素数内のランダム値(JSONのキー)を生成し、対応する値(URL)へ筋肉ワープさせる
+        let randomIndex = Math.floor(Math.random() * (Object.keys(DOUGA_JSON).length + INDEX_ADJUSTMENT)) ;
+        window.open(DOUGA_JSON[randomIndex], "_blank");
+
+        // 筋肉ワープ後、背景画像を更新
+        initBackgroundImage();
+      });
+
+      document.getElementById("doNot").addEventListener("click", function () {
+        let KINNIKUN_WIKIPEDIA = "https://ja.wikipedia.org/wiki/%E3%81%AA%E3%81%8B%E3%82%84%E3%81%BE%E3%81%8D%E3%82%93%E3%81%AB%E5%90%9B";
+        window.open(KINNIKUN_WIKIPEDIA, "_blank");
+
+        // 筋肉ワープ後、背景画像を更新
+        initBackgroundImage();
+      });
+    }
+
+    function initBackgroundImage() {
+      const DIR_PREFIX = "./img/bg/";
+
+      const BG_ARRAY = [
+        "bg-normal.jpg",
+        "bg-rose.jpg",
+        "bg-tanpopo-front.jpg",
+        "bg-one-apple.jpg",
+        "bg-two-apples.jpg",
+        "bg-double-biceps-front.jpg",
+        "bg-tanpopo-back.jpg",
+        "bg-double-biceps-back.jpg"
+      ];
+
+      // 背景画像をランダムに設定
+      // ブラウザのキャッシュで毎回同じ画像を取得しないように、クエリ文字列に現在時刻を付与
+      let randomIndex = Math.floor(Math.random() * BG_ARRAY.length);
+      document.body.style.backgroundImage = "url(" + DIR_PREFIX + BG_ARRAY[randomIndex] + "?" + new Date().toISOString() + ")";
+    }
+
+  </script>
+</body>
+
+</html>
