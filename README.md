@@ -1,7 +1,7 @@
 # kintore-gacha
 
 なかやまきんに君のYoutube動画にランダムに筋肉ワープするアプリです。<br>
-筋トレ動画は自宅でできるものを選別しています。
+自宅でできる筋トレ動画を選別しています。
 
 https://matt-note.github.io/kintore-gacha/
 
