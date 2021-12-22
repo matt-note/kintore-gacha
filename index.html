@@ -2,6 +2,15 @@
 <html lang="ja">
 
 <head>
+  <!-- Global site tag (gtag.js) - Google Analytics - これはheadタグの一番上に配置する必要がある -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6L1E6WKLSK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-6L1E6WKLSK');
+  </script>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,7 +50,15 @@
       background-repeat: no-repeat;                /* 画像をタイル状に繰り返し表示しない */
       background-attachment: fixed;                /* コンテンツの高さが画像の高さより大きい時、動かないように固定 */
       background-size: cover;                      /* 表示するコンテナの大きさに基づいて、背景画像を調整 */
+    /* フッターを一番下に表示するための設定 start */
+      display: flex; 
+      flex-flow: column; /* 要素を縦に並べる */
+      min-height: 100vh; /* 最小でも画面の高さ分のbodyの高さを担保する */
     }
+    main {
+      flex: 1; /* 画面の高さから他の同レイヤーの要素の高さを引いた値に */
+    }
+    /* フッターを一番下に表示するための設定 end */
     img {
       display: block;
       margin: auto;
@@ -69,11 +86,94 @@
     .doNot:hover {
       opacity: 0.9;
     }
+    .footer {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+    }
+    .privacy-policy,
+    .twitter-link{
+      color: white;
+      text-decoration: none;
+      font-size: 12px;
+    }
+    .created-by {
+      color: white;
+      font-size: 12px;
+    }
+    /* modal */
+    .modalArea {
+      visibility: hidden; /* displayではなくvisibility */
+      opacity : 0;
+      position: fixed;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .modalBg {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(30,30,30,0.9);
+    }
+    .modalWrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform:translate(-50%,-50%);
+      width: 70%;
+      max-width: 500px;
+      padding: 30px 30px;
+      background-color: #fff;
+    }
+    .closeModal {
+      position: absolute;
+      top: 0.5rem;
+      right: 1rem;
+      cursor: pointer;
+    }
+    .is-show {
+      visibility: visible;
+      opacity : 1;
+    }/* modal */
+    .modalArea {
+      visibility: hidden; /* displayではなくvisibility */
+      opacity : 0;
+      position: fixed;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .modalBg {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(30,30,30,0.9);
+    }
+    .modalWrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform:translate(-50%,-50%);
+      width: 70%;
+      max-width: 500px;
+      padding: 30px 30px;
+      background-color: #fff;
+    }
+    .closeModal {
+      position: absolute;
+      top: 0.5rem;
+      right: 1rem;
+      cursor: pointer;
+    }
+    .is-show {
+      visibility: visible;
+      opacity : 1;
+    }
     @media screen and (max-width: 900px) {
     /* 画面が小さい時に適用される */
-      body {
-        position: relative;
-      }
       img {
         max-width: 97%;
       }
@@ -94,30 +194,63 @@
         padding: 0;
         margin: 0;
       }
+      .footer {
+        /* position: static; position: fixedの打消し */
+        right: 26%;
+      }
+      .created-by {
+        display: block;
+      }
+      .modalWrapper {
+        width: 90%;
+      }
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <div class="title">
-      <img class="appName" src="./img/appName.png" />
-      <img class="subTitle" src="./img/subTitle.png" />
-    </div>
-    <div class="buttons">
-      <button id="do" class="do">
-        <img src="./img/do.png" />
-      </button>
-      <button id="doNot" class="doNot">
-        <img src="./img/doNot.png" />
-      </button>
-    </div>
+    <main>
+      <div class="title">
+        <img class="appName" src="./img/appName.png" />
+        <img class="subTitle" src="./img/subTitle.png" />
+      </div>
+      <div class="buttons">
+        <button id="do" class="do">
+          <img src="./img/do.png" />
+        </button>
+        <button id="doNot" class="doNot">
+          <img src="./img/doNot.png" />
+        </button>
+      </div>
+    </main>
+    <footer class="footer">
+      <span class="created-by">
+        Created by
+        <a class="twitter-link" href="https://twitter.com/matt59649858">@matt59649858</a>
+      </span>
+      <a id="openModal" class="privacy-policy" href="#">プライバシーポリシー</a>
+    </footer>
   </div>
+  <!-- モーダル -->
+  <section id="modalArea" class="modalArea">
+    <div id="modalBg" class="modalBg"></div>
+    <div class="modalWrapper">
+      <div class="modalContents">
+        <h1>アクセス解析ツールについて</h1>
+        <p>当サイトでは、Googleによるアクセス解析ツール「Googleアナリティクス」を利用しています。このGoogleアナリティクスはトラフィックデータの収集のためにクッキー（Cookie）を使用しております。トラフィックデータは匿名で収集されており、個人を特定するものではありません。</p>
+      </div>
+      <div id="closeModal" class="closeModal">
+        ×
+      </div>
+    </div>
+  </section>
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       init();
       initBackgroundImage();
+      initModal();
     });
 
     function init() {
@@ -192,6 +325,18 @@
       // ブラウザのキャッシュで毎回同じ画像を取得しないように、クエリ文字列に現在時刻を付与
       let randomIndex = Math.floor(Math.random() * BG_IMAGES.length);
       document.body.style.backgroundImage = "url(" + DIR_PREFIX + BG_IMAGES[randomIndex] + "?" + new Date().toISOString() + ")";
+    }
+
+    function initModal() {
+      const openModal = document.getElementById('openModal');
+      const closeModal = document.getElementById('closeModal');
+      const modalBg = document.getElementById('modalBg');
+
+      [openModal,closeModal,modalBg].forEach(function(toggle) {
+        toggle.addEventListener('click',function(){
+          document.getElementById('modalArea').classList.toggle('is-show');
+        });
+      });
     }
 
   </script>
