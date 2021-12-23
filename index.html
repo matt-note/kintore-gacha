@@ -23,7 +23,7 @@
   <meta property="og:title" content="筋トレガチャ" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://matt-note.github.io/kintore-gacha/" />
-  <meta property="og:image" content="https://matt-note.github.io/kintore-gacha/ogp/ogp-1200x630.png" />
+  <meta property="og:image" content="https://matt-note.github.io/kintore-gacha/img/ogp/ogp-1200x630.png" />
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@matt59649858">
@@ -136,7 +136,7 @@
     .is-show {
       visibility: visible;
       opacity : 1;
-    }/* modal */
+    }
     .modalArea {
       visibility: hidden; /* displayではなくvisibility */
       opacity : 0;
@@ -195,7 +195,6 @@
         margin: 0;
       }
       .footer {
-        /* position: static; position: fixedの打消し */
         right: 26%;
       }
       .created-by {
@@ -227,7 +226,9 @@
     <footer class="footer">
       <span class="created-by">
         Created by
-        <a class="twitter-link" href="https://twitter.com/matt59649858">@matt59649858</a>
+        <a class="twitter-link" href="https://twitter.com/matt59649858" target="_blank" rel="noopener noreferrer">
+          @matt59649858
+        </a>
       </span>
       <a id="openModal" class="privacy-policy" href="#">プライバシーポリシー</a>
     </footer>
@@ -248,12 +249,12 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      init();
+      initDestination();
       initBackgroundImage();
       initModal();
     });
 
-    function init() {
+    function initDestination() {
       // JSONのキーは1からスタートさせる
       const INDEX_ADJUSTMENT = 1;
 
@@ -292,7 +293,7 @@
       document.getElementById("do").addEventListener("click", function () {
         //JSON要素数内のランダム値(JSONのキー)を生成し、対応する値(URL)へ筋肉ワープさせる
         let randomIndex = Math.floor(Math.random() * (Object.keys(DOUGA_JSON).length + INDEX_ADJUSTMENT)) ;
-        window.open(DOUGA_JSON[randomIndex], "_blank");
+        window.open(DOUGA_JSON[randomIndex], "_blank", "noreferrer");
 
         // 筋肉ワープ後、背景画像を更新
         initBackgroundImage();
@@ -300,7 +301,7 @@
 
       document.getElementById("doNot").addEventListener("click", function () {
         let KINNIKUN_WIKIPEDIA = "https://ja.wikipedia.org/wiki/%E3%81%AA%E3%81%8B%E3%82%84%E3%81%BE%E3%81%8D%E3%82%93%E3%81%AB%E5%90%9B";
-        window.open(KINNIKUN_WIKIPEDIA, "_blank");
+        window.open(KINNIKUN_WIKIPEDIA, "_blank", "noreferrer");
 
         // 筋肉ワープ後、背景画像を更新
         initBackgroundImage();

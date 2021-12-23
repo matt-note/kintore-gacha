@@ -3,7 +3,7 @@
 なかやまきんに君のYoutube動画にランダムに筋肉ワープするアプリです。<br>
 自宅でできる筋トレ動画を選別しています。
 
-■ URL
+■ URL <br>
 https://matt-note.github.io/kintore-gacha/
 
 ![image](https://user-images.githubusercontent.com/39484102/146679814-acdc72e1-8c67-46ec-a2b6-70198f1bfc66.png)
@@ -14,7 +14,6 @@ https://matt-note.github.io/kintore-gacha/
 なかやまきんに君の持ちネタです。移動する際に使います。
 
 ![image](https://user-images.githubusercontent.com/39484102/146679401-16f2b2d4-c469-4b57-b9cd-85fb3b8cf56a.png)
-
 
 ## 参考
 
